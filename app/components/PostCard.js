@@ -1,24 +1,29 @@
-// import Image from 'next/image'; // Baris ini tidak lagi diperlukan
 import styles from '../ideas/styles.module.css';
 
-// Fungsi untuk format tanggal
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return new Date(dateString).toLocaleDateString('id-ID', options);
 };
 
 export default function PostCard({ post }) {
-  const imageUrl = post.small_image?.[0]?.url || 'https://via.placeholder.com/400x300.png?text=No+Image';
+  const imageUrl = post?.small_image?.url 
+    ? post.small_image.url 
+    : 'https://via.placeholder.com/400x300.png?text=NO+IMAGE';
+
+  console.log("Full post object:", post);
+  console.log("Image URL:", imageUrl);
 
   return (
     <div className={styles.card}>
       <div className={styles.cardImageWrapper}>
-        {/* Menggunakan tag <img> biasa untuk memastikan gambar muncul */}
         <img
           src={imageUrl}
-          alt={post.title}
+          alt={post.title || 'No title'}
           className={styles.cardImageTag}
           loading="lazy"
+          onError={(e) => {
+            e.target.src = 'https://via.placeholder.com/400x300.png?text=INVALID+IMAGE';
+          }}
         />
       </div>
       <div className={styles.cardContent}>
