@@ -7,7 +7,7 @@ const nextConfig = {
         hostname: 'assets.suitdev.com',
         port: '',
         pathname: '/storage/files/**',
-      }, // <-- KOMA YANG HILANG ADA DI SINI
+      },
       {
         protocol: 'https',
         hostname: 'via.placeholder.com',
@@ -16,9 +16,7 @@ const nextConfig = {
       },
     ],
   },
-};
 
-export default {
   async redirects() {
     return [
       {
@@ -26,8 +24,8 @@ export default {
         destination: '/ideas',
         permanent: true,
       },
-    ]
+    ];
   },
-}
+};
 
 export default nextConfig;
